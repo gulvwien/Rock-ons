@@ -1,0 +1,5 @@
+#!/bin/bash
+
+chown -R "$PUSER":"$PGROUP" /config /log
+exec /sbin/setuser "$PUSER" /usr/bin/oscam
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cp /tmp/files/etc/my_init.d/* /etc/my_init.d/
+chmod +x /etc/my_init.d/*
+
+mkdir -p /etc/service/oscam
+cp /tmp/files/etc/service/oscam/run /etc/service/oscam/run
+chmod +x /etc/service/oscam/run
+

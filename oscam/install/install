@@ -1,0 +1,17 @@
+#!/bin/bash
+
+apt-get update -qq
+apt-get install -qy --no-install-recommends python-openssl build-essential subversion libssl-dev libusb-dev libusb-1.0 openssl usbutils
+
+cd /tmp
+curl -O https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+pip install crudini
+svn checkout http://www.streamboard.tv/svn/oscam/trunk@11213 oscam-svn
+cd /tmp/oscam-svn
+./config.sh --disable all --enable WEBIF WITH_SSL WEBIF_LIVELOG WEBIF_JQUERY TOUCH CS_ANTICASC MODULE_MONITOR CS_CHACHEEX CLOCKFIX MODULE_NEWCAMD MODULE_CCCAM READER_NAGRA READER_IRDETO READER_CONAX READER_CRYPTOWORKS READER_SECA READER_VIACCESS READER_VIDEOGUARD READER_DRE READER_TONGFANG READER_BULCRYPT READER_GRIFFIN READER_DGCRYPT CARDREADER_PHOENIX CARDREADER_SMARGO CARDREADER_STINGER
+make OSCAM_BIN=/usr/bin/oscam CONF_DIR=/config NO_PLUS_TARGET=1
+
+apt-get autoremove --purge -qq build-essential subversion libssl-dev libusb-dev gcc binutils make
+apt-get clean
+

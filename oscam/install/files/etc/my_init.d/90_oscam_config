@@ -1,0 +1,30 @@
+#!/bin/bash
+
+export OSCAMCONF="/config/oscam.conf"
+
+if [ ! -f "$OSCAMCONF" ] ; then
+  if [ ! -n "$OSCAMHTTPUSER" ] ; then export OSCAMHTTPUSER=admin ; fi
+  if [ ! -n "$OSCAMHTTPPWD" ] ; then export OSCAMHTTPPWD=password ; fi
+fi
+ 
+crudini --set "$OSCAMCONF" global logfile "/config/oscam.conf"
+crudini --set "$OSCAMCONF" global cwlogdir "/log/cw"
+crudini --set "$OSCAMCONF" global emmlogdir "/log/emm"
+crudini --set "$OSCAMCONF" global usrfile "/log/user.log"
+
+if [ "$OSCAMMONITOR" = 1 ] ; then 
+  crudini --set "$OSCAMCONF" monitor port 24480
+else 
+  crudini --set "$OSCAMCONF" monitor port 0
+fi
+
+if [ "$OSCAMSSL" = 1 ] ; then
+  crudini --set "$OSCAMCONF" webif httpport +8888
+else 
+  crudini --set "$OSCAMCONF" webif httpport 8888
+fi
+if [ -n "$OSCAMHTTPCERT" ] ; then crudini --set "$OSCAMCONF" webif httpcert "$OSCAMHTTPCERT" ; fi
+if [ -n "$OSCAMHTTPUSER" ] ; then crudini --set "$OSCAMCONF" webif httpuser "$OSCAMHTTPUSER" ; fi
+if [ -n "$OSCAMHTTPPWD" ] ; then crudini --set "$OSCAMCONF" webif httppwd "$OSCAMHTTPPWD" ; fi
+crudini --set "$OSCAMCONF" webif httpallowed "172.17.0.0-172.17.255.255"
+

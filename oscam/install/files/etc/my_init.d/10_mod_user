@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! "$(id -u $PUSER)" -eq "$PUID" ] ; then
+  usermod -o -u "$PUID" "$PUSER"
+fi
+if [ ! "$(id -g $PGROUP)" -eq "$PGID" ] ; then
+  groupmod -o -g "$PUID" "$PGROUP"
+fi

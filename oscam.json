@@ -1,0 +1,133 @@
+{
+	"OSCam": {
+		"description": "Open Source Conditional Access Modul",
+		"version": "",
+		"website": "http://streamboard.tv/wiki/OSCam/",
+		"volume_add_support": true,
+		"containers": {
+			"OSCam": {
+				"image": "gulvwien/oscam",
+				"tag": "1.20svn",
+				"ports": {
+					"8888": {
+						"description": "TCP Port for web interface",
+						"label": "Web interface port",
+						"host_default": 8888,
+						"protocol": "tcp"
+					},
+					"24480": {
+						"description": "UDP port for monitor",
+						"label": "Monitor port",
+						"host_default": 24480,
+						"protocol": "udp"
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 1",
+						"host_default": 15000,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 2",
+						"host_default": 15001,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 3",
+						"host_default": 15002,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 4",
+						"host_default": 15003,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 5",
+						"host_default": 15004,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 6",
+						"host_default": 15005,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 7",
+						"host_default": 15006,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 8",
+						"host_default": 15007,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 9",
+						"host_default": 15008,
+					},
+					"15000": {
+						"description": "OSCam listening port for inbound connections.",
+						"label": "OSCam inbound port 10",
+						"host_default": 15009,
+					},
+				},
+				"volumes": {
+					"/config": {
+						"description": "Choose a Share for OSCam configuration.",
+						"label": "Config Storage",
+						"min_size": "10240"
+					},
+					"/log": {
+						"description": "Choose a Share for OSCam logs.",
+						"label": "Log Storage",
+						"min_size": "10240"
+					}
+				},
+				"opts": [
+					[
+						"--device=/dev/ttyUSB0",
+						"--device=/dev/ttyUSB1"
+					]   
+				],
+				"environment": {
+					"PUID": {
+						"description": "Choose a valid UID to run OSCam as. It must have write permissions to all Shares mapped in the previous step.",
+						"label": "UID to run OSCam as",
+						"index": 1
+					},
+					"PGID": {
+						"description": "Choose a valid GID to use along with the above UID. It(or the above UID) must have write permissions to all Shares mapped in the previous step.",
+						"label": "GID to run OSCam as",
+						"index": 2
+					},
+					"OSCAMHTTPUSER": {
+						"description": "Choose a login username for OSCam web interface.",
+						"label": "WebIf username",
+						"index": 3
+					},
+					"OSCAMHTTPPWD": {
+						"description": "Choose a login password for OSCam web interface.",
+						"label": "WebIf password",
+						"index": 4
+					},
+					"OSCAMSSL": {
+						"description": "Enable SSL encryption for OSCam web interface (requires SSL certificate filename).",
+						"label": "Enable SSL for WebIF",
+						"index": 5
+					},
+					"OSCAMHTTPCERT": {
+						"description": "Choose a filename for SSL certificate, certifcate has to be located in OSCam configuration share.",
+						"label": "SSL certificate filename",
+						"index": 6
+					},
+					"OSCAMMONITOR": {
+						"description": "Enable monitor for OSCam (requires mapping for port 24480).",
+						"label": "Enable monitor",
+						"index": 7
+					}
+				}
+			}
+		}
+	}
+}
