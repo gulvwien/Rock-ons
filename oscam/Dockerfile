@@ -27,7 +27,6 @@ RUN groupadd -g "$PGID" "$PGROUP" &&\
     useradd -u "$PUID" -M -g "$PGROUP" -G users,dialout -s /bin/false "$PUSER" &&\
     echo "$PUSER" > /etc/container_environment/PUSER &&\
     echo "$PGROUP" > /etc/container_environment/PGROUP &&\
-    chmod +x /tmp/copy_files /tmp/install &&\
     /tmp/install &&\
     /tmp/copy_files &&\
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* &&\
